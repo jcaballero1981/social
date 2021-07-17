@@ -8,28 +8,32 @@ class User
     private Password $password;
     private UserName $userName;
     private \DateTimeImmutable $createdAt;
+    private  UserIsVisible $isVisible;
 
     private function __construct(
         UserId $userId,
         Password $password,
         UserName $userName,
-        \DateTimeImmutable $createdAt
+        \DateTimeImmutable $createdAt,
+        UserIsVisible $isVisible
     )
     {
         $this->userId = $userId;
         $this->password = $password;
         $this->userName = $userName;
         $this->createdAt = $createdAt;
+        $this->isVisible = $isVisible;
     }
 
     public static function create(
         UserId $userId,
         Password $password,
         UserName $userName,
-        \DateTimeImmutable $createdAt
+        \DateTimeImmutable $createdAt,
+        UserIsVisible $isVisible
     ): self
     {
-        return new self($userId, $password, $userName, $createdAt);
+        return new self($userId, $password, $userName, $createdAt, $isVisible);
     }
 
 
@@ -45,12 +49,17 @@ class User
 
     public function userName(): UserName
     {
-        return $this->userName();
+        return $this->userName;
     }
 
-    public function getCreatedAt(): DateTimeImmutable
+    public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    public function getIsVisible(): UserIsVisible
+    {
+        return $this->isVisible;
     }
 
 

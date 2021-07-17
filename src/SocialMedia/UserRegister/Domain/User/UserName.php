@@ -4,6 +4,7 @@ namespace SocialMedia\UserRegister\Domain\User;
 
 
 use SocialMedia\UserRegister\Domain\User\Exception\UserNameLengthInvalid;
+use SocialMedia\UserRegister\Domain\User\Exception\UserNameContainsInvalidChars;
 
 class UserName
 {
@@ -35,6 +36,13 @@ class UserName
                 \sprintf("Name is too short")
             );
         }
+
+        if (!ctype_alnum($name)) {
+            throw new UserNameContainsInvalidChars(
+                \sprintf("Username contains none alphanumeric chars")
+            );
+        }
+
         return new self( $name);
     }
 

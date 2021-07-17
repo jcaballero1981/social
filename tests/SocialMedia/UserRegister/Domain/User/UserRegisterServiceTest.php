@@ -5,6 +5,7 @@ namespace Tests\SocialMedia\UserRegister\Domain\User;
 use SocialMedia\UserRegister\Domain\User\Password;
 use SocialMedia\UserRegister\Domain\User\User;
 use SocialMedia\UserRegister\Domain\User\UserId;
+use SocialMedia\UserRegister\Domain\User\UserIsVisible;
 use SocialMedia\UserRegister\Domain\User\UserRegisterService;
 use PHPUnit\Framework\TestCase;
 use SocialMedia\UserRegister\Domain\User\UserName;
@@ -19,14 +20,17 @@ class UserRegisterServiceTest extends TestCase
 
         $userName = UserName::create('Joseph') ;
 
+        $isVisible= UserIsVisible::create();
+
         $user = User::create(
             UserId::generate(),
             Password::generate('mysecret'),
             $userName,
-            new \DateTimeImmutable()
+            new \DateTimeImmutable(),
+            $isVisible
         );
 
-        $service->confirmSlot($user);
+        $service->confirmRegister($user);
 
         static::assertSame($user, $repository->getUserByName($userName));
     }
