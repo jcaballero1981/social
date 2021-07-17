@@ -37,9 +37,7 @@ class Password
         return new self($password);
     }
 
-    /**
-     * @return string
-     */
+
     public function getPassword(): string
     {
         return $this->password;

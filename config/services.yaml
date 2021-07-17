@@ -27,3 +27,8 @@ services:
     # Tell Symfony to auto-wire everything that it finds within the SocialMedia namespace
     SocialMedia\:
         resource: '../src/SocialMedia/'
+
+    # Symfony will deal with invoking the handler.
+    SocialMedia\UserRegister\Application\Command\Register\UserRegisterCommandHandler:
+        tags: [messenger.message_handler]
+
